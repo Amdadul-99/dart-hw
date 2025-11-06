@@ -7,15 +7,13 @@ void main() {
     print("Enter student ID (or type 'exit' to stop): ");
     String id = stdin.readLineSync()!;
 
-    if (id.toLowerCase() == 'exit') break;
-
     // Check if ID already exists
-    for (var student in students) {
-      if (student['id'] == id) {
-        print("This ID already exists. Try a different one.");
-        continue;
-      }
+    if (students.any((student) => student['id'] == id)) {
+      print("This ID already exists. Try a different one.");
+      continue;
     }
+
+    if (id.toLowerCase() == 'exit') break;
 
     print("Enter student name: ");
     String name = stdin.readLineSync()!;
