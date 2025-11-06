@@ -4,22 +4,23 @@ void main() {
   List<Map<String, dynamic>> students = [];
 
   while (true) {
-    stdout.write("Enter student ID (or type 'exit' to stop): ");
+    print("Enter student ID (or type 'exit' to stop): ");
     String id = stdin.readLineSync()!;
 
     if (id.toLowerCase() == 'exit') break;
 
-    // Check for unique ID
-    bool idExists = students.any((student) => student['id'] == id);
-    if (idExists) {
-      print("❌ This ID already exists. Try a different one.");
-      continue;
+    // Check if ID already exists
+    for (var student in students) {
+      if (student['id'] == id) {
+        print("This ID already exists. Try a different one.");
+        continue;
+      }
     }
 
-    stdout.write("Enter student name: ");
+    print("Enter student name: ");
     String name = stdin.readLineSync()!;
 
-    stdout.write("Enter student score: ");
+    print("Enter student score: ");
     double score = double.parse(stdin.readLineSync()!);
 
     // Grade calculation
@@ -39,7 +40,7 @@ void main() {
 
     // Store record
     students.add({'id': id, 'name': name, 'score': score, 'grade': grade});
-    print("✅ Student record added successfully!\n");
+    print("Student record added successfully!\n");
   }
 
   // Sort by score (descending)
